@@ -1,0 +1,69 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+<head>
+ 
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+   
+    <title>CRM Login Page</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/sign-in.css" rel="stylesheet" />
+
+
+
+
+</head>
+<body class="d-flex align-items-center py-4 bg-body-tertiary">
+    
+
+
+    <main class="form-signin w-100 m-auto">
+
+        @using (Html.BeginForm("Index", "Login", FormMethod.Post))
+        {
+
+            <center><h1 class="h3 mb-3 fw-normal">Customer Relationship Management Login Page</h1></center>
+            <br />
+            <div class="form-floating">
+                <input type="text" class="form-control" id="userUsername" placeholder="Username" name="userUsername">
+                <label for="userUsername">Username</label>
+            </div>
+            <br />
+
+            <div class="form-floating">
+                <input type="password" class="form-control" id="userPassword" placeholder="Password" name="userPassword">
+                <label for="userPassword">Password</label>
+            </div>
+
+            <br />
+            <button class="btn btn-primary w-100 py-2" type="submit">Login</button>
+
+            <br /> <br />
+
+            if (ViewBag.message != null)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @ViewBag.message
+                </div>
+
+            }
+
+
+
+        }
+
+    </main>
+   
+
+</body>
+</html>
+

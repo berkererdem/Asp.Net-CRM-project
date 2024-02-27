@@ -1,0 +1,52 @@
+﻿@model CRMprojectMVC.Models.Users
+
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="container mt-5">
+    @using (Html.BeginForm("Update", "User", FormMethod.Post, new { @class = "row g-3" }))
+    {
+        <input type="hidden" value="@Model.userID" name="id" />
+        <div class="col-12">
+            <label for="userName" class="form-label">Name</label>
+            <input type="text" class="form-control" id="userName" name="userName" value="@Model.userName" />
+        </div>
+
+        <div class="col-12">
+            <label for="userUsername" class="form-label">Username</label>
+            <input type="text" class="form-control" id="userUsername" name="userUsername" value="@Model.userUsername" />
+        </div>
+
+        <div class="col-12">
+            <label for="userPassword" class="form-label">Password</label>
+            <input type="text" class="form-control" id="userPassword" name="userPassword" value="@Model.userPassword" />
+        </div>
+
+        <div class="col-12">
+            <label for="userSurname" class="form-label">Surname</label>
+            <input type="text" class="form-control" id="userSurname" name="userSurname" value="@Model.userSurname" />
+        </div>
+
+        <div class="col-12">
+            <label for="userMail" class="form-label">Mail</label>
+            <input type="text" class="form-control" id="userMail" name="userMail" value="@Model.userMail" />
+        </div>
+
+        <div class="col-12">
+            <label for="userRole" class="form-label">Role</label>
+            <input type="text" class="form-control" id="userRole" name="userRole" value="@Model.userRole" />
+        </div>
+
+
+
+
+        <div class="col-12">
+            <button class="btn btn-success" type="submit">Update</button>
+        </div>
+
+    }
+
+</div>
+

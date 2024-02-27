@@ -1,0 +1,47 @@
+﻿@model CRMprojectMVC.Models.Tasks
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+
+<div class="container mt-5">
+    @using (Html.BeginForm("Update", "Task", FormMethod.Post, new { @class = "row g-3" }))
+    {
+        <input type="hidden" value="@Model.taskID" name="id" />
+        <div class="col-12">
+            <label for="taskName" class="form-label">Name</label>
+            <input type="text" class="form-control" id="taskName" name="taskName" value="@Model.taskName" />
+        </div>
+
+        <div class="col-12">
+            <label for="taskDescription" class="form-label">Description</label>
+            <input type="text" class="form-control" id="taskDescription" name="taskDescription" value="@Model.taskDescription" />
+        </div>
+
+        <div class="col-12">
+            <label for="taskStartDate" class="form-label">Start Date</label>
+            <input type="text" class="form-control" id="taskStartDate" name="taskStartDate" value="@Model.taskStartDate" />
+        </div>
+
+        <div class="col-12">
+            <label for="taskEndDate" class="form-label">End Date</label>
+            <input type="text" class="form-control" id="taskEndDate" name="taskEndDate" value="@Model.taskEndDate" />
+        </div>
+
+        <div class="col-12">
+            <label for="taskStatus" class="form-label">Status</label>
+            <input type="text" class="form-control" id="taskStatus" name="taskStatus" value="@Model.taskStatus" />
+        </div>   
+
+
+
+        <div class="col-12">
+            <button class="btn btn-success" type="submit">Update</button>
+        </div>
+
+    }
+
+</div>
+
+

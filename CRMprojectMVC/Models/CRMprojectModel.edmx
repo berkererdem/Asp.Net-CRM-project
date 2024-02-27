@@ -1,0 +1,464 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CRMprojectDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CommunicationHistory">
+          <Key>
+            <PropertyRef Name="CommID" />
+          </Key>
+          <Property Name="CommID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CommType" Type="varchar" MaxLength="50" />
+          <Property Name="CommDate" Type="varchar" MaxLength="50" />
+          <Property Name="CommSubject" Type="varchar" MaxLength="50" />
+          <Property Name="CommContent" Type="varchar" MaxLength="50" />
+          <Property Name="CommStatus" Type="varchar" MaxLength="50" />
+          <Property Name="CommCustomerID" Type="int" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="customerID" />
+          </Key>
+          <Property Name="customerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="customerName" Type="varchar" MaxLength="50" />
+          <Property Name="customerSurname" Type="varchar" MaxLength="50" />
+          <Property Name="customerMail" Type="varchar" MaxLength="50" />
+          <Property Name="customerPhone" Type="varchar" MaxLength="50" />
+          <Property Name="customerAddress" Type="varchar" MaxLength="50" />
+          <Property Name="customerCity" Type="varchar" MaxLength="50" />
+          <Property Name="customerCountry" Type="varchar" MaxLength="50" />
+          <Property Name="customerPostalCode" Type="varchar" MaxLength="50" />
+          <Property Name="customerCreationDate" Type="datetime" />
+          <Property Name="customerUpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="productID" />
+          </Key>
+          <Property Name="productID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="productName" Type="varchar" MaxLength="50" />
+          <Property Name="productDescription" Type="varchar" MaxLength="50" />
+          <Property Name="productCategory" Type="varchar" MaxLength="50" />
+          <Property Name="productPrice" Type="varchar" MaxLength="50" />
+          <Property Name="productStockQuantity" Type="varchar" MaxLength="50" />
+          <Property Name="productCreationDate" Type="datetime" />
+          <Property Name="productUpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Sales">
+          <Key>
+            <PropertyRef Name="saleID" />
+          </Key>
+          <Property Name="saleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="saleDate" Type="datetime" />
+          <Property Name="saleQuantity" Type="varchar" MaxLength="50" />
+          <Property Name="saleUnitPrice" Type="varchar" MaxLength="50" />
+          <Property Name="saleDiscountRate" Type="varchar" MaxLength="50" />
+          <Property Name="saleCustomerID" Type="int" />
+          <Property Name="saleProductID" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tasks">
+          <Key>
+            <PropertyRef Name="taskID" />
+          </Key>
+          <Property Name="taskID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="taskName" Type="varchar" MaxLength="50" />
+          <Property Name="taskDescription" Type="varchar" MaxLength="50" />
+          <Property Name="taskStartDate" Type="datetime" />
+          <Property Name="taskEndDate" Type="datetime" />
+          <Property Name="taskStatus" Type="varchar" MaxLength="50" />
+          <Property Name="taskUserID" Type="int" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userUsername" Type="varchar" MaxLength="50" />
+          <Property Name="userPassword" Type="varchar" MaxLength="50" />
+          <Property Name="userName" Type="varchar" MaxLength="50" />
+          <Property Name="userSurname" Type="varchar" MaxLength="50" />
+          <Property Name="userMail" Type="varchar" MaxLength="50" />
+          <Property Name="userRole" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_CommunicationHistory_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <End Role="CommunicationHistory" Type="Self.CommunicationHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="customerID" />
+            </Principal>
+            <Dependent Role="CommunicationHistory">
+              <PropertyRef Name="CommCustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="customerID" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="saleCustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="productID" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="saleProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tasks_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="taskUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CRMprojectDBModelStoreContainer">
+          <EntitySet Name="CommunicationHistory" EntityType="Self.CommunicationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sales" EntityType="Self.Sales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tasks" EntityType="Self.Tasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CommunicationHistory_Customers" Association="Self.FK_CommunicationHistory_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="CommunicationHistory" EntitySet="CommunicationHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_Customers" Association="Self.FK_Sales_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_Products" Association="Self.FK_Sales_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_Users" Association="Self.FK_Tasks_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CRMprojectDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CommunicationHistory">
+          <Key>
+            <PropertyRef Name="CommID" />
+          </Key>
+          <Property Name="CommID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CommType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CommDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CommSubject" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CommContent" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CommStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CommCustomerID" Type="Int32" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_CommunicationHistory_Customers" FromRole="CommunicationHistory" ToRole="Customers" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="customerID" />
+          </Key>
+          <Property Name="customerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="customerSurname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="customerMail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="customerPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="customerAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="customerCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="customerCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="customerPostalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="customerCreationDate" Type="DateTime" Precision="3" />
+          <Property Name="customerUpdateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CommunicationHistory" Relationship="Self.FK_CommunicationHistory_Customers" FromRole="Customers" ToRole="CommunicationHistory" />
+          <NavigationProperty Name="Sales" Relationship="Self.FK_Sales_Customers" FromRole="Customers" ToRole="Sales" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="productID" />
+          </Key>
+          <Property Name="productID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="productDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="productCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="productPrice" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="productStockQuantity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="productCreationDate" Type="DateTime" Precision="3" />
+          <Property Name="productUpdateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Sales" Relationship="Self.FK_Sales_Products" FromRole="Products" ToRole="Sales" />
+        </EntityType>
+        <EntityType Name="Sales">
+          <Key>
+            <PropertyRef Name="saleID" />
+          </Key>
+          <Property Name="saleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="saleDate" Type="DateTime" Precision="3" />
+          <Property Name="saleQuantity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="saleUnitPrice" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="saleDiscountRate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="saleCustomerID" Type="Int32" />
+          <Property Name="saleProductID" Type="Int32" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Sales_Customers" FromRole="Sales" ToRole="Customers" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Sales_Products" FromRole="Sales" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tasks">
+          <Key>
+            <PropertyRef Name="taskID" />
+          </Key>
+          <Property Name="taskID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="taskName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="taskDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="taskStartDate" Type="DateTime" Precision="3" />
+          <Property Name="taskEndDate" Type="DateTime" Precision="3" />
+          <Property Name="taskStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="taskUserID" Type="Int32" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Tasks_Users" FromRole="Tasks" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userUsername" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="userPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="userSurname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="userMail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="userRole" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK_Tasks_Users" FromRole="Users" ToRole="Tasks" />
+        </EntityType>
+        <Association Name="FK_CommunicationHistory_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <End Role="CommunicationHistory" Type="Self.CommunicationHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="customerID" />
+            </Principal>
+            <Dependent Role="CommunicationHistory">
+              <PropertyRef Name="CommCustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="customerID" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="saleCustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="productID" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="saleProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tasks_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="taskUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CRMprojectDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CommunicationHistory" EntityType="Self.CommunicationHistory" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" />
+          <EntitySet Name="Products" EntityType="Self.Products" />
+          <EntitySet Name="Sales" EntityType="Self.Sales" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Tasks" EntityType="Self.Tasks" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_CommunicationHistory_Customers" Association="Self.FK_CommunicationHistory_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="CommunicationHistory" EntitySet="CommunicationHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_Customers" Association="Self.FK_Sales_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_Products" Association="Self.FK_Sales_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_Users" Association="Self.FK_Tasks_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CRMprojectDBModelStoreContainer" CdmEntityContainer="CRMprojectDBEntities">
+          <EntitySetMapping Name="CommunicationHistory">
+            <EntityTypeMapping TypeName="CRMprojectDBModel.CommunicationHistory">
+              <MappingFragment StoreEntitySet="CommunicationHistory">
+                <ScalarProperty Name="CommID" ColumnName="CommID" />
+                <ScalarProperty Name="CommType" ColumnName="CommType" />
+                <ScalarProperty Name="CommDate" ColumnName="CommDate" />
+                <ScalarProperty Name="CommSubject" ColumnName="CommSubject" />
+                <ScalarProperty Name="CommContent" ColumnName="CommContent" />
+                <ScalarProperty Name="CommStatus" ColumnName="CommStatus" />
+                <ScalarProperty Name="CommCustomerID" ColumnName="CommCustomerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="CRMprojectDBModel.Customers">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="customerID" ColumnName="customerID" />
+                <ScalarProperty Name="customerName" ColumnName="customerName" />
+                <ScalarProperty Name="customerSurname" ColumnName="customerSurname" />
+                <ScalarProperty Name="customerMail" ColumnName="customerMail" />
+                <ScalarProperty Name="customerPhone" ColumnName="customerPhone" />
+                <ScalarProperty Name="customerAddress" ColumnName="customerAddress" />
+                <ScalarProperty Name="customerCity" ColumnName="customerCity" />
+                <ScalarProperty Name="customerCountry" ColumnName="customerCountry" />
+                <ScalarProperty Name="customerPostalCode" ColumnName="customerPostalCode" />
+                <ScalarProperty Name="customerCreationDate" ColumnName="customerCreationDate" />
+                <ScalarProperty Name="customerUpdateDate" ColumnName="customerUpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="CRMprojectDBModel.Products">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="productName" ColumnName="productName" />
+                <ScalarProperty Name="productDescription" ColumnName="productDescription" />
+                <ScalarProperty Name="productCategory" ColumnName="productCategory" />
+                <ScalarProperty Name="productPrice" ColumnName="productPrice" />
+                <ScalarProperty Name="productStockQuantity" ColumnName="productStockQuantity" />
+                <ScalarProperty Name="productCreationDate" ColumnName="productCreationDate" />
+                <ScalarProperty Name="productUpdateDate" ColumnName="productUpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sales">
+            <EntityTypeMapping TypeName="CRMprojectDBModel.Sales">
+              <MappingFragment StoreEntitySet="Sales">
+                <ScalarProperty Name="saleID" ColumnName="saleID" />
+                <ScalarProperty Name="saleDate" ColumnName="saleDate" />
+                <ScalarProperty Name="saleQuantity" ColumnName="saleQuantity" />
+                <ScalarProperty Name="saleUnitPrice" ColumnName="saleUnitPrice" />
+                <ScalarProperty Name="saleDiscountRate" ColumnName="saleDiscountRate" />
+                <ScalarProperty Name="saleCustomerID" ColumnName="saleCustomerID" />
+                <ScalarProperty Name="saleProductID" ColumnName="saleProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CRMprojectDBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="CRMprojectDBModel.Tasks">
+              <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="taskID" ColumnName="taskID" />
+                <ScalarProperty Name="taskName" ColumnName="taskName" />
+                <ScalarProperty Name="taskDescription" ColumnName="taskDescription" />
+                <ScalarProperty Name="taskStartDate" ColumnName="taskStartDate" />
+                <ScalarProperty Name="taskEndDate" ColumnName="taskEndDate" />
+                <ScalarProperty Name="taskStatus" ColumnName="taskStatus" />
+                <ScalarProperty Name="taskUserID" ColumnName="taskUserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="CRMprojectDBModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="userUsername" ColumnName="userUsername" />
+                <ScalarProperty Name="userPassword" ColumnName="userPassword" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="userSurname" ColumnName="userSurname" />
+                <ScalarProperty Name="userMail" ColumnName="userMail" />
+                <ScalarProperty Name="userRole" ColumnName="userRole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

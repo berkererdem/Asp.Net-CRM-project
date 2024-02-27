@@ -1,0 +1,58 @@
+﻿@model CRMprojectMVC.Models.Products
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+
+<div class="container mt-5">
+    @using (Html.BeginForm("Update", "Product", FormMethod.Post, new { @class = "row g-3" }))
+    {
+        <input type="hidden" value="@Model.productID" name="id" />
+        <div class="col-12">
+            <label for="productName" class="form-label">Name</label>
+            <input type="text" class="form-control" id="productName" name="productName" value="@Model.productName" />
+        </div>
+
+        <div class="col-12">
+            <label for="productDescription" class="form-label">Description</label>
+            <input type="text" class="form-control" id="productDescription" name="productDescription" value="@Model.productDescription" />
+        </div>
+
+        <div class="col-12">
+            <label for="productCategory" class="form-label">Category</label>
+            <input type="text" class="form-control" id="productCategory" name="productCategory" value="@Model.productCategory" />
+        </div>
+
+        <div class="col-12">
+            <label for="productPrice" class="form-label">Price</label>
+            <input type="text" class="form-control" id="productPrice" name="productPrice" value="@Model.productPrice" />
+        </div>
+
+        <div class="col-12">
+            <label for="productStockQuantity" class="form-label">Stock Quantity</label>
+            <input type="text" class="form-control" id="productStockQuantity" name="productStockQuantity" value="@Model.productStockQuantity" />
+        </div>
+
+        <div class="col-12">
+            <label for="productCreationDate" class="form-label">Creation Date</label>
+            <input type="text" class="form-control" id="productCreationDate" name="productCreationDate" value="@Model.productCreationDate" />
+        </div>
+
+        <div class="col-12">
+            <label for="productUpdateDate" class="form-label">Update Date</label>
+            <input type="text" class="form-control" id="productUpdateDate" name="productUpdateDate" value="@Model.productUpdateDate" />
+        </div>
+
+
+
+
+        <div class="col-12">
+            <button class="btn btn-success" type="submit">Update</button>
+        </div>
+
+    }
+
+</div>
+
+

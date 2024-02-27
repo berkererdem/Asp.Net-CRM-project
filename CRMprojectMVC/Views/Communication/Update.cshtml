@@ -1,0 +1,47 @@
+﻿@model CRMprojectMVC.Models.CommunicationHistory
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="container mt-5">
+    @using (Html.BeginForm("Update", "Communication", FormMethod.Post, new { @class = "row g-3" }))
+    {
+        <input type="hidden" value="@Model.CommID" name="id" />
+        <div class="col-12">
+            <label for="CommType" class="form-label">Type</label>
+            <input type="text" class="form-control" id="CommType" name="CommType" value="@Model.CommType" />
+        </div>
+
+        <div class="col-12">
+            <label for="CommDate" class="form-label">Date</label>
+            <input type="text" class="form-control" id="CommDate" name="CommDate" value="@Model.CommDate" />
+        </div>
+
+        <div class="col-12">
+            <label for="CommSubject" class="form-label">Subject</label>
+            <input type="text" class="form-control" id="CommSubject" name="CommSubject" value="@Model.CommSubject" />
+        </div>
+
+        <div class="col-12">
+            <label for="CommContent" class="form-label">Content</label>
+            <input type="text" class="form-control" id="CommContent" name="CommContent" value="@Model.CommContent" />
+        </div>
+
+        <div class="col-12">
+            <label for="CommStatus" class="form-label">Status</label>
+            <input type="text" class="form-control" id="CommStatus" name="CommStatus" value="@Model.CommStatus" />
+        </div>
+
+
+
+        <div class="col-12">
+            <button class="btn btn-success" type="submit">Update</button>
+        </div>
+
+    }
+
+</div>
+
+
+

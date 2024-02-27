@@ -1,0 +1,75 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CRM Main Page</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />  @*//*@
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script> @*//*@
+    <script src="~/Scripts/jquery-3.7.0.min.js"></script> @*//*@
+    <script src="~/Scripts/gridmvc.js"></script>  @*//*@
+    <link href="~/Content/Gridmvc.css" rel="stylesheet" /> @*//*@
+ 
+
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">CRM</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                    <li class="nav-item">
+                        @Html.ActionLink("Home", "Index", "User", new { }, new { @class = "nav-link" })
+                    </li>
+
+                    <li class="nav-item">
+                        @Html.ActionLink("Users", "Users", "User", new { }, new { @class = "nav-link" })
+                    </li>
+
+                    <li class="nav-item">
+                        @Html.ActionLink("Customers", "Customers", "Customer", new { }, new { @class = "nav-link" })
+                    </li>
+
+                    <li class="nav-item">
+                        @Html.ActionLink("Products", "Index", "Product", new { }, new { @class = "nav-link" })
+                    </li>
+
+                    <li class="nav-item">
+                        @Html.ActionLink("Sales", "Index", "Sale", new { }, new { @class = "nav-link" })
+                    </li>
+
+                    <li class="nav-item">
+                        @Html.ActionLink("Tasks", "Index", "Task", new { }, new { @class = "nav-link" })
+                    </li>
+
+                    <li class="nav-item">
+                        @Html.ActionLink("Communication History", "Index", "Communication", new { }, new { @class = "nav-link" })
+                    </li>
+
+
+
+                </ul>
+                
+            </div>
+        </div>
+    </nav>
+
+
+    <main role="main" class="container">
+        @RenderBody()
+
+    </main>
+
+
+</body>
+</html>

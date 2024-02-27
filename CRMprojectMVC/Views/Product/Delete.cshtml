@@ -1,0 +1,86 @@
+﻿@model CRMprojectMVC.Models.Products
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.productName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.productName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.productDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.productDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.productCategory)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.productCategory)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.productPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.productPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.productStockQuantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.productStockQuantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.productCreationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.productCreationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.productUpdateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.productUpdateDate)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-success" /> 
+
+        </div>
+
+        <br />
+        <div class="col-md-offset-2 col-md-10">
+            @Html.ActionLink("Back to List", "Products", null, new { @class = "btn btn-secondary" })
+        </div>
+    }
+</div>

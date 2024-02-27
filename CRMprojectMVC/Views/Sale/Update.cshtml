@@ -1,0 +1,43 @@
+﻿@model CRMprojectMVC.Models.Sales
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+
+<div class="container mt-5">
+    @using (Html.BeginForm("Update", "Sale", FormMethod.Post, new { @class = "row g-3" }))
+    {
+        <input type="hidden" value="@Model.saleID" name="id" />
+        <div class="col-12">
+            <label for="saleDate" class="form-label">Date</label>
+            <input type="text" class="form-control" id="saleDate" name="saleDate" value="@Model.saleDate" />
+        </div>
+
+        <div class="col-12">
+            <label for="saleQuantity" class="form-label">Quantity</label>
+            <input type="text" class="form-control" id="saleQuantity" name="saleQuantity" value="@Model.saleQuantity" />
+        </div>
+
+        <div class="col-12">
+            <label for="saleUnitPrice" class="form-label">Unit Price</label>
+            <input type="text" class="form-control" id="saleUnitPrice" name="saleUnitPrice" value="@Model.saleUnitPrice" />
+        </div>
+
+        <div class="col-12">
+            <label for="saleDiscountRate" class="form-label">Discount Rate</label>
+            <input type="text" class="form-control" id="saleDiscountRate" name="saleDiscountRate" value="@Model.saleDiscountRate" />
+        </div>
+
+        
+
+
+        <div class="col-12">
+            <button class="btn btn-success" type="submit">Update</button>
+        </div>
+
+    }
+
+</div>
+
+
